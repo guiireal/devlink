@@ -24,7 +24,11 @@ export const routes = createBrowserRouter([
     element: <Login />,
   },
   {
-    path: "networks",
-    element: <Networks />,
+    path: "/networks",
+    element: (
+      <AuthenticatedMiddleware>
+        <Networks />
+      </AuthenticatedMiddleware>
+    ),
   },
 ]);

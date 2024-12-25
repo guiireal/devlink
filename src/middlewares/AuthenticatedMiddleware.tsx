@@ -42,7 +42,7 @@ export function AuthenticatedMiddleware({
   }
 
   if (!signed) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/login" />;
   }
 
   return <>{children}</>;
