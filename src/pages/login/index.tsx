@@ -1,15 +1,35 @@
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { FormEvent, useState } from "react";
+import { useNavigate } from "react-router";
 import { Input } from "../../components/Input";
 import { Logo } from "../../components/Logo";
+import { auth } from "../../services/firebaseConnection";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-  function handleSubmit(event: FormEvent) {
+  async function handleSubmit(event: FormEvent) {
     event.preventDefault();
 
-    console.log({ email, password });
+    if (!email || !password) {
+      alert("Preencha todos os campos!");
+      return;
+    }
+
+    try {
+      const response = await signInWithEmailAndPassword(auth, email, password);
+
+      if (!response.user) {
+        alert("Usuário ou senha incorretos!");
+      }
+
+      await navigate("/admin", { replace: true });
+    } catch (error) {
+      console.log(error);
+      alert("Usuário ou senha incorretos!");
+    }
   }
 
   return (

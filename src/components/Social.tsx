@@ -1,6 +1,8 @@
+import { ReactNode } from "react";
+
 type SocialProps = {
   url: string;
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 export function Social({ url, children }: SocialProps) {

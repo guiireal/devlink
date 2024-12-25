@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router";
 
+import { AuthenticatedMiddleware } from "./middlewares/AuthenticatedMiddleware";
 import Admin from "./pages/admin";
 import Home from "./pages/home";
 import Login from "./pages/login";
@@ -12,7 +13,11 @@ export const routes = createBrowserRouter([
   },
   {
     path: "/admin",
-    element: <Admin />,
+    element: (
+      <AuthenticatedMiddleware>
+        <Admin />
+      </AuthenticatedMiddleware>
+    ),
   },
   {
     path: "/login",
